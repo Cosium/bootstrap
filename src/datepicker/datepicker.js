@@ -262,8 +262,8 @@ angular.module('ui.bootstrap.datepicker', ['ui.bootstrap.position'])
   showButtonBar: true
 })
 
-.directive('datepickerPopup', ['$compile', '$parse', '$document', '$position', 'dateFilter', 'datepickerPopupConfig', 'datepickerConfig',
-function ($compile, $parse, $document, $position, dateFilter, datepickerPopupConfig, datepickerConfig) {
+.directive('datepickerPopup', ['$compile', '$parse', '$document', '$position', 'dateFilter', 'dateParser', 'datepickerPopupConfig', 'datepickerConfig',
+function ($compile, $parse, $document, $position, dateFilter, datepickerPopupConfig, dateParser, datepickerConfig) {
   return {
     restrict: 'EA',
     require: 'ngModel',
@@ -343,27 +343,27 @@ function ($compile, $parse, $document, $position, dateFilter, datepickerPopupCon
       }
 
       // TODO: reverse from dateFilter string to Date object
-      function parseDate(viewValue) {
-        if (!viewValue) {
-          ngModel.$setValidity('date', true);
-          return null;
-        } else if (angular.isDate(viewValue)) {
-          ngModel.$setValidity('date', true);
-          return viewValue;
-        } else if (angular.isString(viewValue)) {
-          var date = new Date(viewValue);
-          if (isNaN(date)) {
-            ngModel.$setValidity('date', false);
-            return undefined;
-          } else {
-            ngModel.$setValidity('date', true);
-            return date;
-          }
-        } else {
-          ngModel.$setValidity('date', false);
-          return undefined;
+        function parseDate(viewValue) {
+            if (!viewValue) {
+                ngModel.$setValidity('date', true);
+                return null;
+            } else if (angular.isDate(viewValue) && !isNaN(viewValue)) {
+                ngModel.$setValidity('date', true);
+                return viewValue;
+            } else if (angular.isString(viewValue)) {
+                var date = dateParser.parse(viewValue, dateFormat) || new Date(viewValue);
+                if (isNaN(date)) {
+                    ngModel.$setValidity('date', false);
+                    return undefined;
+                } else {
+                    ngModel.$setValidity('date', true);
+                    return date;
+                }
+            } else {
+                ngModel.$setValidity('date', false);
+                return undefined;
+            }
         }
-      }
       ngModel.$parsers.unshift(parseDate);
 
       // Inner change
