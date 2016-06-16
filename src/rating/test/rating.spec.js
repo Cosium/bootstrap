@@ -365,4 +365,25 @@ describe('rating directive', function() {
       expect(getTitles()).toEqual(['one', 'two', 'three', 'four', 'five']);
     });
   });
+
+  describe('Default icon base class', function() {
+    it('should return the default icon base class for each star', function() {
+      var stars = getStars();
+      for (var i = 0, n = stars.length; i < n; i++) {
+        expect(stars.eq(i).hasClass('glyphicon'));
+      }
+    });
+  });
+
+  describe('Custom icon base class', function() {
+    it('should return the custom icon base class for each star', function() {
+      $rootScope.iconBaseClass = 'foo';
+      element = $compile('<span uib-rating ng-model="rate" icon-base-class="iconBaseClass"></span>')($rootScope);
+      $rootScope.$digest();
+      var stars = getStars();
+      for (var i = 0, n = stars.length; i < n; i++) {
+        expect(stars.eq(i).hasClass('foo'));
+      }
+    });
+  });
 });
