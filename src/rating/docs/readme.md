@@ -42,6 +42,11 @@ Rating directive that will take care of visualising a star rating bar.
   <small class="badge">$</small>
   _(Default: `true`)_ -
   Clicking the icon of the current rating will reset the rating to 0.
+  
+* `icon-base-class`
+  <small class="badge">$</small>
+  _(Default: `glyphicon`)_ -
+  A variable used in the template to specify the class applied to all icons. 
 
 * `state-off`
   <small class="badge">$</small>

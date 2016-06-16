@@ -5,6 +5,7 @@ angular.module('ui.bootstrap.rating', [])
   stateOn: null,
   stateOff: null,
   enableReset: true,
+  iconBaseClass: 'glyphicon',
   titles: ['one', 'two', 'three', 'four', 'five']
 })
 
@@ -26,6 +27,7 @@ angular.module('ui.bootstrap.rating', [])
 
     this.stateOn = angular.isDefined($attrs.stateOn) ? $scope.$parent.$eval($attrs.stateOn) : ratingConfig.stateOn;
     this.stateOff = angular.isDefined($attrs.stateOff) ? $scope.$parent.$eval($attrs.stateOff) : ratingConfig.stateOff;
+    this.iconBaseClass = angular.isDefined($attrs.iconBaseClass) ? $scope.$parent.$eval($attrs.iconBaseClass) : ratingConfig.iconBaseClass;
     this.enableReset = angular.isDefined($attrs.enableReset) ?
       $scope.$parent.$eval($attrs.enableReset) : ratingConfig.enableReset;
     var tmpTitles = angular.isDefined($attrs.titles) ? $scope.$parent.$eval($attrs.titles) : ratingConfig.titles;
@@ -40,7 +42,7 @@ angular.module('ui.bootstrap.rating', [])
 
   this.buildTemplateObjects = function(states) {
     for (var i = 0, n = states.length; i < n; i++) {
-      states[i] = angular.extend({ index: i }, { stateOn: this.stateOn, stateOff: this.stateOff, title: this.getTitle(i) }, states[i]);
+      states[i] = angular.extend({ index: i }, { stateOn: this.stateOn, stateOff: this.stateOff, iconBaseClass: this.iconBaseClass, title: this.getTitle(i) }, states[i]);
     }
     return states;
   };
