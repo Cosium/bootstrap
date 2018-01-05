@@ -1,7 +1,7 @@
 {
   "author": "https://github.com/angular-ui/bootstrap/graphs/contributors",
   "name": "@cosium/angular-ui-bootstrap",
-  "version": "2.5.403",
+  "version": "2.5.404",
   "publishConfig": {
     "registry": "https://npm.cosium.com"
   },
