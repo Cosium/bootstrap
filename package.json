@@ -1,7 +1,10 @@
 {
   "author": "https://github.com/angular-ui/bootstrap/graphs/contributors",
-  "name": "angular-ui-bootstrap",
-  "version": "2.5.4",
+  "name": "@cosium/angular-ui-bootstrap",
+  "version": "2.5.400",
+  "publishConfig": {
+    "registry": "https://npm.cosium.com"
+  },
   "description": "Native AngularJS (Angular) directives for Bootstrap",
   "homepage": "http://angular-ui.github.io/bootstrap/",
   "keywords": [
@@ -23,11 +26,12 @@
   "main": "index.js",
   "scripts": {
     "demo": "grunt after-test && static dist -a 0.0.0.0 -H '{\"Cache-Control\": \"no-cache, must-revalidate\"}'",
-    "test": "grunt"
+    "test": "grunt",
+    "release": "grunt build && npm version patch && git pull origin master && git push origin master && git push origin master --tags && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angular-ui/bootstrap.git"
+    "url": "https://github.com/Cosium/bootstrap.git"
   },
   "devDependencies": {
     "angular": "1.6.1",
